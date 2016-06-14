@@ -1,12 +1,14 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static java.lang.System.out;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public class HWStream{
     public static void main(String[] args) {
-        List<Dish> menu = Arrays.asList(
+        List<Dish> menu = asList(
                 new Dish("pork",false,800, Dish.Type.MEAT),
                 new Dish("beef",false,700, Dish.Type.MEAT),
                 new Dish("chicken",false,400, Dish.Type.MEAT),
@@ -18,12 +20,12 @@ public class HWStream{
                 new Dish("salmon",false,450, Dish.Type.FISH)
         );
 
-        List<String> threeHighCaloricDishNames;
-        long menuLength = menu.stream().filter(d -> d.getCalories() > 300).count();
-//                        .stream()
-//                        .filter(d -> d.getCalories() > 300).count();
-//        out.println(threeHighCaloricDishNames);
-        out.println(menuLength);
+        List<List<Integer>> intlist1 = asList(
+                asList(0, 2, 4, 6, 8, 10, 12, 14, 16, 18),
+                asList(0, 5, 10, 15, 20, 25, 30, 35, 40));
+        List<Integer> intlist2 = asList(0, 3, 6, 9, 12, 15, 18, 21);
+
+        long count = intlist1.stream().flatMap(l -> l.stream()).flatMap(i1 -> intlist2.stream().filter(i2 -> i1 == i2)).count();
 
     }
 }
